@@ -1,2 +1,32 @@
-.App {
-}
+
+.TextSizeXL {
+    font-size: 1.2rem !important;
+  }
+  .TextSize2XL {
+    font-size: 2rem !important;
+  }
+  .TextSize3XL {
+    font-size: 3rem !important;
+  }
+  .TextSize4XL {
+    font-size: 4rem !important;
+  }
+  
+  .Width100 {
+    width: 100% !important;
+  }
+  .Width85 {
+    width: 85% !important;
+  }
+  .Width80 {
+    width: 80% !important;
+  }
+  .Width75 {
+    width: 75% !important;
+  }
+  .Width50 {
+    width: 50% !important;
+  }
+  .Width25 {
+    width: 25% !important;
+  }
