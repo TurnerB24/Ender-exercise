@@ -119,9 +119,11 @@ export default class PropertyService {
    * @param {number} id The property id
    */
   async getProperty(id) {
-    return axios
-      .post(`https://talent.ender.com/fe-challenge/properties/${id}/leases`, {
+    return axios.post(
+      `https://talent.ender.com/fe-challenge/properties/${id}/leases`,
+      {
         token: this.token,
-      })
+      }
+    );
   }
 }

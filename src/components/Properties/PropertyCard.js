@@ -16,10 +16,10 @@ export default class PropertyCard extends React.Component {
   constructor(props) {
     super(props);
 
-    this.formatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      maximumFractionDigits: 2  //this can be configured differently if you don't want pennies in the monthly and annual cost per square foot
+    this.formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 2, //this can be configured differently if you don't want pennies in the monthly and annual cost per square foot
     });
 
     this.state = {
@@ -33,21 +33,21 @@ export default class PropertyCard extends React.Component {
     };
 
     //Parse out the base rent and compute the monthly and annual cost per sqft
-    if(props.data.baseRent && props.data.sqft) {
+    if (props.data.baseRent && props.data.sqft) {
       //Turn our currency formatted string into an integer for math
       const currency = props.data.baseRent;
-      const baseRentInt = Number(currency.replace(/[^0-9.-]+/g,""));
+      const baseRentInt = Number(currency.replace(/[^0-9.-]+/g, ""));
       this.state = {
         ...this.state,
         monthlyCPSF: baseRentInt / props.data.sqft,
-        annualCPSF: ((baseRentInt / props.data.sqft) * 12)
-      }
+        annualCPSF: (baseRentInt / props.data.sqft) * 12,
+      };
     } else {
       this.state = {
         ...this.state,
         monthlyCPSF: 0,
-        annualCPSF: 0
-      }
+        annualCPSF: 0,
+      };
     }
   }
 
@@ -61,7 +61,10 @@ export default class PropertyCard extends React.Component {
   render() {
     return (
       <Grid item xs={12} md={6} lg={4} xl={3}>
-        <Card className="Width100" aria-label={`property-card-${this.state.id}`}>
+        <Card
+          className="Width100"
+          aria-label={`property-card-${this.state.id}`}
+        >
           <CardHeader
             title={this.state.name}
             subheader={`${this.state.address1} ${this.state.address2}`}
@@ -70,7 +73,9 @@ export default class PropertyCard extends React.Component {
             <hr></hr>
             <Grid container justifyContent="space-between">
               <Grid item xs={6}>
-                <Typography variant="subtitle1">{this.state.sqft} sqft</Typography>
+                <Typography variant="subtitle1">
+                  {this.state.sqft} sqft
+                </Typography>
               </Grid>
               <Grid item xs={6}>
                 <Typography variant="subtitle1">
@@ -78,17 +83,22 @@ export default class PropertyCard extends React.Component {
                 </Typography>
               </Grid>
               <Grid item xs={6}>
-                <Typography variant="subtitle1">{this.formatter.format(this.state.monthlyCPSF)} sqft/mo</Typography>
+                <Typography variant="subtitle1">
+                  {this.formatter.format(this.state.monthlyCPSF)} sqft/mo
+                </Typography>
               </Grid>
               <Grid item xs={6}>
                 <Typography variant="subtitle1">
-                {this.formatter.format(this.state.annualCPSF)} sqft/year
+                  {this.formatter.format(this.state.annualCPSF)} sqft/year
                 </Typography>
               </Grid>
             </Grid>
           </CardContent>
           <CardActions>
-            <IconButton onClick={this.handleClick} aria-label={`property-details-button-${this.state.id}`}>
+            <IconButton
+              onClick={this.handleClick}
+              aria-label={`property-details-button-${this.state.id}`}
+            >
               <VisibilityIcon /> See Details
             </IconButton>
           </CardActions>

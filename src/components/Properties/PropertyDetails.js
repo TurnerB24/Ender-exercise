@@ -22,17 +22,17 @@ export default class PropertyDetails extends React.Component {
   }
 
   getPrimaryContact(contacts) {
-    for(const contact of Object.keys(contacts)) {
-      if(contacts[contact].tags.includes('PRIMARY')) {
-        return `${contact}: ${contacts[contact].phone}`
+    for (const contact of Object.keys(contacts)) {
+      if (contacts[contact].tags.includes("PRIMARY")) {
+        return `${contact}: ${contacts[contact].phone}`;
       }
     }
     //No primary contact found, give the first tenant we see as a backup, other wise no contacts
-    if(contacts) {
+    if (contacts) {
       const tenant = Object.keys(contacts)[0];
-      return `BACKUP - ${tenant} : ${contacts[tenant].phone}`
+      return `BACKUP - ${tenant} : ${contacts[tenant].phone}`;
     } else {
-      return 'No Contact Information Available'
+      return "No Contact Information Available";
     }
   }
 
@@ -53,15 +53,17 @@ export default class PropertyDetails extends React.Component {
               </TableHead>
               {this.state.tenants.length > 0 ? (
                 <TableBody>
-                {this.state.tenants.map((tenant) => (
-                  <TableRow key={tenant.id}>
-                    <TableCell>{tenant.companyName}</TableCell>
-                    <TableCell>{tenant.startDate}</TableCell>
-                    <TableCell>{tenant.inclusiveEndDate}</TableCell>
-                    <TableCell>{tenant.status}</TableCell>
-                    <TableCell>{this.getPrimaryContact(tenant.contacts)}</TableCell>
-                  </TableRow>
-                ))}
+                  {this.state.tenants.map((tenant) => (
+                    <TableRow key={tenant.id}>
+                      <TableCell>{tenant.companyName}</TableCell>
+                      <TableCell>{tenant.startDate}</TableCell>
+                      <TableCell>{tenant.inclusiveEndDate}</TableCell>
+                      <TableCell>{tenant.status}</TableCell>
+                      <TableCell>
+                        {this.getPrimaryContact(tenant.contacts)}
+                      </TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
               ) : (
                 <TableBody>
@@ -72,7 +74,7 @@ export default class PropertyDetails extends React.Component {
                     <TableCell>N/A</TableCell>
                     <TableCell>N/A</TableCell>
                   </TableRow>
-              </TableBody>
+                </TableBody>
               )}
             </Table>
           </TableContainer>

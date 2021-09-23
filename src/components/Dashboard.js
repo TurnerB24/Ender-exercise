@@ -1,4 +1,6 @@
 import { Grid } from "@material-ui/core";
+import Box from "@material-ui/core/Box/Box";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import React from "react";
 import PropertyService from "../services/propertyService/PropertyService";
 import PropertyCard from "./Properties/PropertyCard";
@@ -15,7 +17,11 @@ export default class Dashboard extends React.Component {
     this.state = {
       selectedProperty: { id: -1 },
       properties: [],
-      propertyCards: []
+      propertyCards: (
+        <Box sx={{ display: "flex" }}>
+          <CircularProgress />
+        </Box>
+      ),
     };
   }
 
@@ -43,9 +49,9 @@ export default class Dashboard extends React.Component {
         />
       );
     }
-    console.log(tmpPropertyCards)
+    console.log(tmpPropertyCards);
     this.setState({
-      propertyCards: tmpPropertyCards
+      propertyCards: tmpPropertyCards,
     });
   }
 
@@ -57,7 +63,7 @@ export default class Dashboard extends React.Component {
     this.propService.getProperty(id).then((res) => {
       console.log(res.data);
       this.setState({
-        selectedProperty: {id, tenants: res.data}
+        selectedProperty: { id, tenants: res.data },
       });
     });
   }
@@ -65,11 +71,21 @@ export default class Dashboard extends React.Component {
   render() {
     return (
       <Grid container justifyContent="space-evenly" spacing={8}>
-        <Grid item container key={this.state.propertyCards.length} spacing={3} xs={12} justifyContent="space-around">
+        <Grid
+          item
+          container
+          key={this.state.propertyCards.length}
+          spacing={3}
+          xs={12}
+          justifyContent="space-around"
+        >
           {this.state.propertyCards}
         </Grid>
         <Grid item container spacing={8} xs={12}>
-          <PropertyDetails key={this.state.selectedProperty.id} data={this.state.selectedProperty} />
+          <PropertyDetails
+            key={this.state.selectedProperty.id}
+            data={this.state.selectedProperty}
+          />
         </Grid>
       </Grid>
     );
